@@ -25,6 +25,8 @@
             register: register
         };
 
+        return Authentication;
+
         /**
          * @name register
          * @desc Try to register a new user
