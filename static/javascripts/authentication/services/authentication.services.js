@@ -22,10 +22,30 @@
          * @returns {Factory}
          */
         var Authentication = {
-            register: register
+            register: register,
+            login: login,
+            getAuthenticatedAccount: getAuthenticatedAccount,
+            isAuthenticated: isAuthenticated,
+            setAuthenticatedAccount: setAuthenticatedAccount,
+            unauthenticate: unauthenticate
         };
 
         return Authentication;
+
+        /**
+         * @name login
+         * @desc Try to login user with email and password
+         * @param {string} email The email entered by user
+         * @param {string} password The password entered by user
+         * @returns {HttpPromise}
+         * @memberOf thinkster.authentication.services.Authentication
+         */
+        function login(email, password) {
+            return $http.post('/api/v1/auth/login/', {
+                email: email,
+                password: password
+            });
+        };
 
         /**
          * @name register
@@ -43,6 +63,54 @@
                 password: password
             })
         }
+
+        /**
+         * @name getAuthenticatedAccount
+         * @desc Returns the currently authenticated account
+         * @returns {object|undefined} Account if authenticated, else `undefined`
+         * @memberOf thinkster.authentication.services.Authentication
+         */
+        function getAuthenticatedAccount() {
+            var accountJSON = $cookies.authenticatedAccount;
+
+            if (!accountJSON) {
+                return;
+            }
+
+            return JSON.parse(accountJSON);
+        };
+
+        /**
+         * @name isAuthenticated
+         * @desc Check if the current user is authenticated
+         * @returns {boolean} true if authenticated, else false
+         * @memberOf thinkster.authenticated.services.Authentication
+         */
+        function isAuthenticated() {
+            return !!$cookies.authenticatedAccount;
+        }
+
+        /**
+         * @name setAuthenticatedAccount
+         * @desc Stringify the account object and store it in cookies
+         * @param {Object} user The account to be stored
+         * @returns {undefined}
+         * @memberOf thinkster.authenticated.services.Authentication
+         */
+        function setAuthenticatedAccount(account) {
+            $cookies.authenticatedAccount = JSON.stringify(account);
+        }
+
+        /**
+         * @name unauthenticate
+         * @desc Delete stringified account object from cookies
+         * @returns {undefined}
+         * @memberOf thinkster.authenticated.services.Authentication
+         */
+        function unauthenticate() {
+            delete $cookies.authenticatedAccount;
+        }
+        
 
     };
 })();
