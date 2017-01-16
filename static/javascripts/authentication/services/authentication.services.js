@@ -79,7 +79,24 @@
                 email: email,
                 username: username,
                 password: password
-            })
+            }).then(registerSuccessFn, registerErrorFn);
+
+            /**
+             * @name registerSuccessFn
+             * @desc Log the new user in
+             */
+            function registerSuccessFn(data, status, headers, config) {
+                Authentication.login(email, password);
+            };
+
+            /**
+             * @name registerErrorFn
+             * @desc console error msg that signup failed
+             */
+
+            function registerErrorFn(data, status, headers, config) {
+                console.error("User signup failed!");
+            };
         }
 
         /**
