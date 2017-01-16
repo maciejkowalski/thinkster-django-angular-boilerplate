@@ -44,7 +44,25 @@
             return $http.post('/api/v1/auth/login/', {
                 email: email,
                 password: password
-            });
+            }).then(loginSuccessFn, loginErrorFn);
+
+            /**
+             * @name loginSuccessFn
+             * @desc Set the authenticated account and redirect with refresh to home page
+             */
+            function loginSuccessFn(data, status, headers, config) {
+                Authentication.setAuthenticatedAccount(data.data);
+
+                window.location = '/';
+            };
+
+            /**
+             * @name loginErrorFn
+             * @desc print Login failed
+             */
+            function loginErrorFn(data, status, headers, config) {
+                console.error('Login failed!')
+            };
         };
 
         /**
@@ -110,7 +128,7 @@
         function unauthenticate() {
             delete $cookies.authenticatedAccount;
         }
-        
+
 
     };
 })();
