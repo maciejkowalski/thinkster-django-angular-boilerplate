@@ -73,7 +73,7 @@
          * @memberOf thinkster.authentication.services.Authentication
          */
         function logout() {
-            return $http.post('/api/v1/auth/logout')
+            return $http.post('/api/v1/auth/logout/')
                 .then(logoutSuccessFn, logoutErrorFn);
 
             /**
