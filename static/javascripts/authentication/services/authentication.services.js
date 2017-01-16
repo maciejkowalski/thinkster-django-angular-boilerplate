@@ -24,6 +24,7 @@
         var Authentication = {
             register: register,
             login: login,
+            logout: logout,
             getAuthenticatedAccount: getAuthenticatedAccount,
             isAuthenticated: isAuthenticated,
             setAuthenticatedAccount: setAuthenticatedAccount,
@@ -62,6 +63,35 @@
              */
             function loginErrorFn(data, status, headers, config) {
                 console.error('Login failed!')
+            };
+        };
+
+        /**
+         * @name logout
+         * @desc Try to log the user out
+         * @returns {HttpPromise}
+         * @memberOf thinkster.authentication.services.Authentication
+         */
+        function logout() {
+            return $http.post('/api/v1/auth/logout')
+                .then(logoutSuccessFn, logoutErrorFn);
+
+            /**
+             * @name logoutSuccessFn
+             * @desc Handle successfull login - unauthenticate user and redirect to root page
+             */
+            function logoutSuccessFn(data, status, headers, config) {
+                Authentication.unauthenticate();
+
+                window.location = '/';
+            };
+
+            /**
+             * @name logoutErrorFn
+             * @desc console error logout failed
+             */
+            function logoutErrorFn(data, status, headers, config) {
+                console.error("Logout failed!");
             };
         };
 
