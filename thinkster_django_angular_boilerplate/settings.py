@@ -40,6 +40,7 @@ INSTALLED_APPS = (
     'compressor',
     'django_extensions',
     'authentication',
+    'posts'
 )
 
 MIDDLEWARE_CLASSES = (
