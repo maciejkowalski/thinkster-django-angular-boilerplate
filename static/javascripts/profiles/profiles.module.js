@@ -8,8 +8,8 @@
         ]);
 
     angular
-        .module('thinkster.profiles.controllers');
+        .module('thinkster.profiles.controllers', []);
 
     angular
-        .module('thinkster.profiles.services');
+        .module('thinkster.profiles.services', []);
 })();
