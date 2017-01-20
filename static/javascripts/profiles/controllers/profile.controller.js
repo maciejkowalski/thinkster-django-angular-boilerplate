@@ -19,7 +19,7 @@
             var username = $routeParams.username.substr(1);
 
             Profile.get(username).then(profileSuccessFn, profileErrorFn);
-            Posts.get(username).then(postsSuccessFn, postErrorFn);
+            Posts.get(username).then(postsSuccessFn, postsErrorFn);
 
             function profileSuccessFn(data, status, headers, config) {
                 vm.profile = data.data;
