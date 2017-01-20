@@ -1,4 +1,4 @@
-(function() {
+(function($, _) {
     'use strict';
 
     angular
@@ -6,7 +6,10 @@
         .factory("Snackbar", Snackbar);
 
     function Snackbar() {
-        var Snackbar = {};
+        var Snackbar = {
+            error: error,
+            show: show
+        };
 
         return Snackbar;
 
