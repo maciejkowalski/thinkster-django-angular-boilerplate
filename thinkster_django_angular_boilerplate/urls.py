@@ -23,7 +23,7 @@ urlpatterns = patterns(
     url(r'^api/v1/auth/logout/$', LogoutView.as_view(), name='logout'),
 
     url(r'^api/v1/', include(router.urls)),
-    url(r'^api/v1', include(accounts_router.urls)),
+    url(r'^api/v1/', include(accounts_router.urls)),
 
     url('^.*$', IndexView.as_view(), name='index'),
 )
