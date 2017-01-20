@@ -27,7 +27,7 @@ class AccountPostsViewSet(viewsets.ModelViewSet):
     serializer_class = PostSerializer
 
     def list(self, request, account_username=None):
-        queryset = self.queryset.filter(account__username=account_username)
+        queryset = self.queryset.filter(author__username=account_username)
         serializer = self.serializer_class(queryset, many=True)
 
         return Response(serializer.data)
