@@ -25,7 +25,7 @@
         }
 
         function update(profile) {
-            return $http.post('/api/v1/accounts/' + profile.username + "/", profile);
+            return $http.put('/api/v1/accounts/' + profile.username + "/", profile);
         }
     }
 })();
